@@ -17,7 +17,7 @@
       <div class="collapse navbar-collapse w-100 order-1" id="navbarNav">
         <ul class="navbar-nav ml-auto">
           <li class="nav-item">
-            <a class="nav-link" href="admin/index.php">Admin</a>
+            <a class="nav-link" href="<?php echo BASE_URL; ?>admin">Admin</a>
           </li>
         </ul>
       </div>
@@ -26,13 +26,27 @@
   <div class="container">
     <div class="row">
       <main class="col">
-        <ul>
-          <li>
-            <a href="posts.php">Manage Posts</a>
-          </li>
-        </ul>
+        <h2 class="display-4">
+          New post
+          <small class="text-muted">
+            <a href="<?php echo BASE_URL; ?>admin/posts" class="btn btn-outline-danger">Back</a>
+          </small>
+        </h2>
+        <?php if (isset($result) && $result) : ?>
+          <div class="alert alert-success">Post created!</div>
+        <?php endif; ?>
+        <form method="post">
+          <div class="form-group">
+            <label for="title">Title</label>
+            <input type="text" class="form-control" name="title" id="title">
+          </div>
+          <div class="form-group">
+            <label for="content">Express yourself</label>
+            <textarea class="form-control" name="content" id="content" rows="10"></textarea>
+          </div>
+          <button type="submit" class="btn btn-primary">Create post</button>
+        </form>
       </main>
-      <aside class="col-lg-3">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Officia magni obcaecati facilis et, molestiae iste harum aperiam qui atque mollitia laboriosam! Non iste, eos mollitia in sapiente voluptates qui soluta?</aside>
     </div>
   </div>
   <footer class="bg-light">

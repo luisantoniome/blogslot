@@ -1,22 +1,3 @@
-<?php
-
-  require_once '../config.php';
-
-  $result = false;
-
-  if (!empty($_POST)) {
-    $query = "INSERT INTO posts (title, content) VALUES (:title, :content)";
-    $preparedQuery = $pdo->prepare($query);
-    $result = $preparedQuery->execute([
-      'title' => $_POST['title'],
-      'content' => $_POST['content'],
-    ]);
-
-    header('Location: posts.php');
-  }
-
-?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -36,7 +17,7 @@
       <div class="collapse navbar-collapse w-100 order-1" id="navbarNav">
         <ul class="navbar-nav ml-auto">
           <li class="nav-item">
-            <a class="nav-link" href="admin/index.php">Admin</a>
+            <a class="nav-link" href="<?php echo BASE_URL; ?>admin">Admin</a>
           </li>
         </ul>
       </div>
@@ -45,24 +26,13 @@
   <div class="container">
     <div class="row">
       <main class="col">
-        <h2 class="display-4">
-          New post
-          <small class="text-muted">
-            <a href="posts.php" class="btn btn-outline-danger">Cancel</a>
-          </small>
-        </h2>
-        <form action="create-post.php" method="post">
-          <div class="form-group">
-            <label for="title">Title</label>
-            <input type="text" class="form-control" name="title" id="title">
-          </div>
-          <div class="form-group">
-            <label for="content">Express yourself</label>
-            <textarea class="form-control" name="content" id="content" rows="10"></textarea>
-          </div>
-          <button type="submit" class="btn btn-primary">Create post</button>
-        </form>
+        <ul>
+          <li>
+            <a href="<?php echo BASE_URL; ?>admin/posts">Manage Posts</a>
+          </li>
+        </ul>
       </main>
+      <aside class="col-lg-3">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Officia magni obcaecati facilis et, molestiae iste harum aperiam qui atque mollitia laboriosam! Non iste, eos mollitia in sapiente voluptates qui soluta?</aside>
     </div>
   </div>
   <footer class="bg-light">

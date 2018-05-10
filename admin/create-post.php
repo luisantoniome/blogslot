@@ -1,3 +1,22 @@
+<?php
+
+  require_once '../config.php';
+
+  $result = false;
+
+  if (!empty($_POST)) {
+    $query = "INSERT INTO posts (title, content) VALUES (:title, :content)";
+    $preparedQuery = $pdo->prepare($query);
+    $result = $preparedQuery->execute([
+      'title' => $_POST['title'],
+      'content' => $_POST['content'],
+    ]);
+
+    header('Location: posts.php');
+  }
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -29,7 +48,7 @@
         <h2 class="display-4">
           New post
           <small class="text-muted">
-            <a href="posts.php" class="btn btn-outline-danger">cancel</a>
+            <a href="posts.php" class="btn btn-outline-danger">Cancel</a>
           </small>
         </h2>
         <form action="create-post.php" method="post">

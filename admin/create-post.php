@@ -1,13 +1,3 @@
-<?php
-
-  require_once 'config.php';
-  $query = $pdo->prepare('SELECT * FROM posts ORDER BY id DESC');
-  $query->execute();
-
-  $posts = $query->fetchAll(PDO::FETCH_ASSOC);
-
-?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -36,22 +26,24 @@
   <div class="container">
     <div class="row">
       <main class="col">
-        <?php foreach ($posts as $post) : ?>
-          <div class="blog-post">
-            <h2 class="display-4"><?= $post['title']; ?></h2>
-            <p class="font-weight-light text-secondary">
-              May 9, 2018 by <a href="#">Kate Austen</a>
-            </p>
-            <div class="blog-post-image">
-              <img src="https://source.unsplash.com/random/1920x500" class="img-fluid" alt="">
-            </div>
-            <div class="blog-post-content mt-3">
-              <p><?= $post['content'] ?></p>
-            </div>
+        <h2 class="display-4">
+          New post
+          <small class="text-muted">
+            <a href="posts.php" class="btn btn-outline-danger">cancel</a>
+          </small>
+        </h2>
+        <form action="create-post.php" method="post">
+          <div class="form-group">
+            <label for="title">Title</label>
+            <input type="text" class="form-control" name="title" id="title">
           </div>
-        <?php endforeach; ?>
+          <div class="form-group">
+            <label for="content">Express yourself</label>
+            <textarea class="form-control" name="content" id="content" rows="10"></textarea>
+          </div>
+          <button type="submit" class="btn btn-primary">Create post</button>
+        </form>
       </main>
-      <aside class="col-lg-3">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Officia magni obcaecati facilis et, molestiae iste harum aperiam qui atque mollitia laboriosam! Non iste, eos mollitia in sapiente voluptates qui soluta?</aside>
     </div>
   </div>
   <footer class="bg-light">

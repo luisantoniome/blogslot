@@ -1,6 +1,6 @@
 <?php
 
-  require_once 'config.php';
+  require_once '../config.php';
   $query = $pdo->prepare('SELECT * FROM posts ORDER BY id DESC');
   $query->execute();
 
@@ -36,22 +36,35 @@
   <div class="container">
     <div class="row">
       <main class="col">
-        <?php foreach ($posts as $post) : ?>
-          <div class="blog-post">
-            <h2 class="display-4"><?= $post['title']; ?></h2>
-            <p class="font-weight-light text-secondary">
-              May 9, 2018 by <a href="#">Kate Austen</a>
-            </p>
-            <div class="blog-post-image">
-              <img src="https://source.unsplash.com/random/1920x500" class="img-fluid" alt="">
-            </div>
-            <div class="blog-post-content mt-3">
-              <p><?= $post['content'] ?></p>
-            </div>
-          </div>
-        <?php endforeach; ?>
+        <h2 class="display-4">
+          All posts
+          <small class="text-muted">
+            <a href="create-post.php" class="btn btn-primary">New post</a>
+          </small>
+        </h2>
+        <table class="table">
+          <thead>
+            <tr>
+              <th>Date</th>
+              <th>Title</th>
+              <th>Author</th>
+              <th>Edit</th>
+              <th>Delete</th>
+            </tr>
+          </thead>
+          <tbody>
+            <?php foreach ($posts as $post) : ?>
+              <tr>
+                <td>May 9, 2018</td>
+                <td><?= $post['title'] ?></td>
+                <td>Kate Austen</td>
+                <td>Edit</td>
+                <td>Delete</td>
+              </tr>
+            <?php endforeach; ?>
+          </tbody>
+        </table>
       </main>
-      <aside class="col-lg-3">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Officia magni obcaecati facilis et, molestiae iste harum aperiam qui atque mollitia laboriosam! Non iste, eos mollitia in sapiente voluptates qui soluta?</aside>
     </div>
   </div>
   <footer class="bg-light">

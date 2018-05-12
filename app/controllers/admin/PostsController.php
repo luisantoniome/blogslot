@@ -1,6 +1,7 @@
 <?php
 namespace App\Controllers\Admin;
 
+use App\Models\Post;
 use App\Controllers\BaseController;
 
 class PostsController extends BaseController
@@ -8,12 +9,7 @@ class PostsController extends BaseController
   // admin/posts || admin/posts/index
   public function getIndex()
   {
-    global $pdo;
-
-    $query = $pdo->prepare('SELECT * FROM posts ORDER BY id DESC');
-    $query->execute();
-
-    $posts = $query->fetchAll(\PDO::FETCH_ASSOC);
+    $posts = Post::all();
 
     return $this->render('admin/posts.twig', ['posts' => $posts]);
   }
@@ -26,14 +22,14 @@ class PostsController extends BaseController
 
   public function postNew()
   {
-    global $pdo;
-    
-    $query = "INSERT INTO posts (title, content) VALUES (:title, :content)";
-    $preparedQuery = $pdo->prepare($query);
-    $result = $preparedQuery->execute([
+    $post = new Post([
       'title' => $_POST['title'],
       'content' => $_POST['content'],
     ]);
+
+    $post->save();
+
+    $result = true;
 
     return $this->render('admin/create-post.twig', ['result' => $result]);
   }

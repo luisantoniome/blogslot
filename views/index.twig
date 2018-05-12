@@ -1,0 +1,23 @@
+{% extends "layout.twig" %}
+
+{% block content %}
+
+  <main class="col">
+    {% for post in posts %}
+      <div class="blog-post">
+        <h2 class="display-4">{{ post.title }}</h2>
+        <p class="font-weight-light text-secondary">
+          May 9, 2018 by <a href="#">Kate Austen</a>
+        </p>
+        <div class="blog-post-image">
+          <img src="https://source.unsplash.com/random/1920x500" class="img-fluid" alt="">
+        </div>
+        <div class="blog-post-content mt-3">
+          <p>{{ post.content }}</p>
+        </div>
+      </div>
+    {% endfor %}
+  </main>
+  <aside class="col-lg-3">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Officia magni obcaecati facilis et, molestiae iste harum aperiam qui atque mollitia laboriosam! Non iste, eos mollitia in sapiente voluptates qui soluta?</aside>
+
+{% endblock %}

@@ -1,0 +1,30 @@
+{% extends "layout.twig" %}
+
+{% block content %}
+
+<main class="col">
+  <h2 class="display-4">
+    New post
+    <small class="text-muted">
+      <a href="{{ 'admin/posts' | url }}" class="btn btn-outline-danger">Back</a>
+    </small>
+  </h2>
+
+  {% if result %}
+    <div class="alert alert-success">Post created!</div>
+  {% endif %}
+
+  <form method="post">
+    <div class="form-group">
+      <label for="title">Title</label>
+      <input type="text" class="form-control" name="title" id="title">
+    </div>
+    <div class="form-group">
+      <label for="content">Express yourself</label>
+      <textarea class="form-control" name="content" id="content" rows="10"></textarea>
+    </div>
+    <button type="submit" class="btn btn-primary">Create post</button>
+  </form>
+</main>
+
+{% endblock %}

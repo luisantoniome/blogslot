@@ -3,6 +3,7 @@ namespace App\Controllers\Admin;
 
 use App\Models\Post;
 use App\Controllers\BaseController;
+use Sirius\Validation\Validator;
 
 class PostsController extends BaseController
 {
@@ -22,15 +23,29 @@ class PostsController extends BaseController
 
   public function postNew()
   {
-    $post = new Post([
-      'title' => $_POST['title'],
-      'content' => $_POST['content'],
+    $errors = [];
+    $result = false;
+
+    $validator = new Validator();
+    $validator->add('title', 'required');
+    $validator->add('content', 'required');
+
+    if ($validator->validate($_POST)) {
+      $post = new Post([
+        'title' => $_POST['title'],
+        'content' => $_POST['content'],
+      ]);
+  
+      $post->save();
+  
+      $result = true;
+    } else {
+      $errors = $validator->getMessages();
+    }
+
+    return $this->render('admin/create-post.twig', [
+      'result' => $result,
+      'errors' => $errors
     ]);
-
-    $post->save();
-
-    $result = true;
-
-    return $this->render('admin/create-post.twig', ['result' => $result]);
   }
 }
